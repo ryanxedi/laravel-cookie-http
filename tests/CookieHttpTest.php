@@ -23,6 +23,6 @@ class CookieHttpTest extends TestCase
 
         $value = Http::cookieGet('testcookie');
 
-        \$this->assertEquals('value', $value);
+        $this->assertEquals('value', $value);
     }
 }
