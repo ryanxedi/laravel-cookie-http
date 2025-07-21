@@ -1,0 +1,35 @@
+{
+    "name": "ryanxedi/laravel-cookie-http",
+    "description": "Stateful HTTP client for Laravel using Guzzle CookieJar",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Howard",
+            "email": "you@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ryanxedi\\CookieHttp\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ryanxedi\\CookieHttp\\CookieHttpServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "orchestra/testbench": "^10.4"
+    }
+}
