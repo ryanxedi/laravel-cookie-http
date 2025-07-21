@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Ryanxedi\CookieHttp;
@@ -24,4 +23,12 @@ class HttpCookieStore
         return collect(self::jar()->toArray())
             ->firstWhere('Name', $name)['Value'] ?? null;
     }
+
+    public static function index(string $key = 'default'): array
+    {
+        return collect(self::jar($key)->toArray())
+            ->mapWithKeys(fn ($cookie) => [$cookie['Name'] => $cookie['Value']])
+            ->all();
+    }
+    
 }

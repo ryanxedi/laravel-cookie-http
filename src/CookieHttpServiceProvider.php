@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Ryanxedi\CookieHttp;
@@ -21,6 +20,10 @@ class CookieHttpServiceProvider extends ServiceProvider
 
         Http::macro('cookieGet', function (string $name) {
             return HttpCookieStore::get($name);
+        });
+
+        Http::macro('cookieIndex', function (string $key = 'default') {
+            return HttpCookieStore::index($key);
         });
     }
 }
