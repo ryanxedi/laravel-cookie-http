@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require --dev orchestra/testbench:${{ matrix.testbench }} --no-update
-          composer install --prefer-dist --no-interaction --no-progress
+          composer update --prefer-dist --no-interaction --no-progress
           
       - name: Debug - Check all files exist
         run: |
