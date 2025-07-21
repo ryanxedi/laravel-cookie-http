@@ -30,5 +30,14 @@ jobs:
           composer require --dev orchestra/testbench:${{ matrix.testbench }} --no-update
           composer install --prefer-dist --no-interaction --no-progress
           
-      - name: Run PHPUnit with full output
-        run: vendor/bin/phpunit --verbose --debug --testdox
+      - name: Debug - Check all files exist
+        run: |
+          echo "=== Service Provider ==="
+          cat src/CookieHttpServiceProvider.php
+          echo "=== HttpCookieStore ==="
+          cat src/HttpCookieStore.php
+          echo "=== Test file ==="
+          cat tests/CookieHttpTest.php
+          
+      - name: Run PHPUnit with full error details
+        run: vendor/bin/phpunit --verbose --debug --stop-on-failure
