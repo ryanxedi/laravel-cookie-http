@@ -16,18 +16,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Ryanxedi\\\\CookieHttp\\\\": "src/"
+            "Ryanxedi\\CookieHttp\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ryanxedi\\\\CookieHttp\\\\CookieHttpServiceProvider"
+                "Ryanxedi\\CookieHttp\\CookieHttpServiceProvider"
             ]
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
         "phpunit/phpunit": "^10.0"
     },
     "minimum-stability": "dev",
