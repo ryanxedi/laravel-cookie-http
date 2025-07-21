@@ -8,7 +8,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false  # Don't cancel other jobs when one fails
+      fail-fast: false
       matrix:
         include:
           - php: 8.1
@@ -25,16 +25,40 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           
-      - name: Validate composer.json
-        run: composer validate --strict
-        
       - name: Install dependencies
         run: |
           composer require --dev orchestra/testbench:${{ matrix.testbench }} --no-update
           composer install --prefer-dist --no-interaction --no-progress
           
-      - name: List installed packages
-        run: composer show
-        
-      - name: Run PHPUnit with verbose output
-        run: vendor/bin/phpunit --verbose
+      - name: Debug - Full file structure
+        run: |
+          echo "=== Working directory ==="
+          pwd
+          echo "=== All files ==="
+          find . -type f -name "*.php" -o -name "*.xml" -o -name "*.json"
+          echo "=== PHPUnit config ==="
+          cat phpunit.xml 2>/dev/null || echo "No phpunit.xml found"
+          echo "=== Test file content ==="
+          cat tests/CookieHttpTest.php 2>/dev/null || echo "No test file found"
+          echo "=== Composer autoload ==="
+          cat vendor/composer/autoload_psr4.php | grep -A5 -B5 "CookieHttp" || echo "No autoload found"
+          
+      - name: Check PHP syntax
+        run: |
+          echo "=== Checking PHP syntax ==="
+          find tests -name "*.php" -exec php -l {} \; || echo "Syntax errors found"
+          
+      - name: PHPUnit version and config
+        run: |
+          echo "=== PHPUnit version ==="
+          vendor/bin/phpunit --version
+          echo "=== PHPUnit configuration check ==="
+          vendor/bin/phpunit --configuration phpunit.xml --list-tests-xml || echo "Configuration error"
+          
+      - name: Try to list tests
+        run: |
+          echo "=== Attempting to list tests ==="
+          vendor/bin/phpunit --list-tests || echo "Failed to list tests - exit code: $?"
+          
+      - name: Run PHPUnit with maximum verbosity
+        run: vendor/bin/phpunit --debug --verbose
