@@ -1,7 +1,4 @@
-
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Ryanxedi\CookieHttp\Tests;
 
@@ -20,9 +17,7 @@ class CookieHttpTest extends TestCase
     {
         Http::cookieStore();
         Http::withCookies()->get('https://httpbin.org/cookies/set?testcookie=value');
-
         $value = Http::cookieGet('testcookie');
-
         $this->assertEquals('value', $value);
     }
 }
